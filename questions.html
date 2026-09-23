@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions | Al-Hikmah LMS Admin</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/admin-layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="sidebar" id="sidebar">
+      <button class="sidebar__close" id="sidebarClose">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="sidebar__brand">
+        <img src="./img/logo.png" alt="Al-Hikmah logo" onerror="this.style.display='none'">
+        <div class="sidebar__brand-text">
+          Al-Hikmah LMS
+          <span>Admin Portal</span>
+        </div>
+      </div>
+
+      <ul class="sidebar__nav">
+        <li>
+          <a href="dashboard.html" class="sidebar__link">
+            <i data-lucide="layout-dashboard" class="icon"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+        <li class="sidebar__section-label">Users</li>
+        <li>
+          <a href="students.html" class="sidebar__link">
+            <i data-lucide="graduation-cap" class="icon"></i>
+            <span>Students</span>
+          </a>
+        </li>
+        <li>
+          <a href="instructors.html" class="sidebar__link">
+            <i data-lucide="user" class="icon"></i>
+            <span>Instructors</span>
+          </a>
+        </li>
+
+        <li class="sidebar__section-label">Content</li>
+        <li>
+          <a href="categories.html" class="sidebar__link">
+            <i data-lucide="folder-tree" class="icon"></i>
+            <span>Categories</span>
+          </a>
+        </li>
+        <li>
+          <a href="courses.html" class="sidebar__link">
+            <i data-lucide="book-open" class="icon"></i>
+            <span>Courses</span>
+          </a>
+        </li>
+        <li>
+          <a href="modules.html" class="sidebar__link">
+            <i data-lucide="layers" class="icon"></i>
+            <span>Modules</span>
+          </a>
+        </li>
+        <li>
+          <a href="materials.html" class="sidebar__link">
+            <i data-lucide="file-text" class="icon"></i>
+            <span>Materials</span>
+          </a>
+        </li>
+
+        <li class="sidebar__section-label">Assessment</li>
+        <li>
+          <a href="assignments.html" class="sidebar__link">
+            <i data-lucide="clipboard-list" class="icon"></i>
+            <span>Assignments</span>
+          </a>
+        </li>
+        <li>
+          <a href="submissions.html" class="sidebar__link">
+            <i data-lucide="inbox" class="icon"></i>
+            <span>Submissions</span>
+          </a>
+        </li>
+        <li>
+          <a href="quizzes.html" class="sidebar__link">
+            <i data-lucide="help-circle" class="icon"></i>
+            <span>Quizzes</span>
+          </a>
+        </li>
+        <li>
+          <a href="questions.html" class="sidebar__link active">
+            <i data-lucide="check-square" class="icon"></i>
+            <span>Questions</span>
+          </a>
+        </li>
+
+        <li class="sidebar__section-label">Reports</li>
+        <li>
+          <a href="results.html" class="sidebar__link">
+            <i data-lucide="trophy" class="icon"></i>
+            <span>Results</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar__footer">
+        <button class="sidebar__logout" onclick="handleLogout()">
+          <i data-lucide="log-out" class="icon"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-main">
+
+      <header class="admin-header">
+        <div style="display:flex; align-items:center; gap: var(--space-md);">
+          <button class="sidebar-toggle" id="sidebarToggle">
+            <i data-lucide="menu"></i>
+          </button>
+          <h1 class="admin-header__title">Questions</h1>
+        </div>
+
+        <div class="admin-header__actions">
+          <div class="notification-wrapper">
+            <button class="admin-header__icon-btn" id="notificationBtn">
+              <i data-lucide="bell" style="width:18px;height:18px;"></i>
+              <span class="badge" id="notificationBadge">3</span>
+            </button>
+            <div class="notification-dropdown" id="notificationDropdown">
+              <div class="notification-dropdown__header">Notifications</div>
+              <div id="notificationList"></div>
+            </div>
+          </div>
+
+          <a href="profile.html" class="admin-header__user" style="cursor: pointer;">
+            <div class="admin-header__avatar" id="adminInitials">AU</div>
+            <div>
+              <div class="admin-header__user-name" id="adminName">Admin User</div>
+              <div class="admin-header__user-role" id="adminRole">Administrator</div>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <main class="admin-content">
+
+        <div class="dashboard-welcome">
+          <div>
+            <h2 class="dashboard-welcome__title">Questions</h2>
+            <p class="dashboard-welcome__subtitle">Build the questions and answer options for each quiz</p>
+          </div>
+          <button class="btn btn-primary" onclick="openQuestionModal()">
+            <i data-lucide="plus" style="width:16px;height:16px;"></i>
+            New Question
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <div class="table-toolbar">
+  <div class="form-group" style="margin-bottom:0; min-width:260px;">
+    <label class="form-label" for="questionQuizFilter">Quiz</label>
+    <select class="form-control" id="questionQuizFilter">
+      <!-- filled in by JS -->
+    </select>
+  </div>
+  <div id="marksTotalIndicator"></div>
+</div>
+
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Question</th><th>Marks</th><th>Options</th><th>Correct Answer</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="questionsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Add/Edit Question Modal -->
+  <div class="modal-overlay" id="questionModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="questionModalTitle">New Question</div>
+        <button class="modal-close" onclick="closeQuestionModal()">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" id="questionId">
+
+        <div class="form-group">
+          <label class="form-label" for="questionQuiz">Quiz</label>
+          <select class="form-control" id="questionQuiz">
+            <!-- filled in by JS -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="questionText">Question</label>
+          <textarea class="form-control" id="questionText" placeholder="e.g. What does HTML stand for?"></textarea>
+          <div class="form-error" id="questionTextError" style="display:none;">Question text is required</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="questionMarks">Marks</label>
+          <input type="number" class="form-control" id="questionMarks" min="1" placeholder="e.g. 1" style="max-width:120px;">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Options</label>
+          <div class="form-hint" style="margin-top:0; margin-bottom: var(--space-sm);">
+            Select the radio button next to the correct answer.
+          </div>
+          <div id="optionsContainer">
+            <!-- option rows injected by JS -->
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" onclick="addOptionRow()" style="margin-top: var(--space-sm);">
+            <i data-lucide="plus" style="width:14px;height:14px;"></i>
+            Add Option
+          </button>
+          <div class="form-error" id="optionsError" style="display:none;">Add at least 2 options and mark one as correct</div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeQuestionModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveQuestion()">Save Question</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Question Preview Modal (student view) -->
+<div class="modal-overlay" id="questionPreviewModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Question Preview</div>
+      <button class="modal-close" onclick="closeQuestionPreviewModal()">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-hint" style="margin-bottom: var(--space-md);">This is how the question will look to a student.</div>
+      <div id="previewQuestionText" style="font-weight:600; margin-bottom: var(--space-md);">—</div>
+      <div id="previewOptionsList"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeQuestionPreviewModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/admin-layout.js"></script>
+  <script src="js/questions.js"></script>
+</body>
+</html>

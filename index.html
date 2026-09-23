@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="2; url=dashboard.html">
+  <title>Al-Hikmah LMS Admin</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .redirect-box {
+      color: var(--color-text);
+    }
+    .logo-text {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+    }
+    .logo-text span {
+      color: var(--color-primary);
+    }
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-primary);
+      border-radius: 59%;
+      margin: 0 auto var(--space-md);
+      animation: spin 0.8s linear infinite;
+    }
+    .redirect-text {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="redirect-box">
+    <div class="logo-text">Al-Hikmah <span>LMS</span></div>
+    <div class="spinner"></div>
+    <p class="redirect-text">Loading admin dashboard...</p>
+  </div>
+</body>
+</html>

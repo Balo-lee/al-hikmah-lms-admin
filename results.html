@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results | Al-Hikmah LMS Admin</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/admin-layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="sidebar" id="sidebar">
+      <button class="sidebar__close" id="sidebarClose">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="sidebar__brand">
+        <img src="./img/logo.png" alt="Al-Hikmah logo" onerror="this.style.display='none'">
+        <div class="sidebar__brand-text">
+          Al-Hikmah LMS
+          <span>Admin Portal</span>
+        </div>
+      </div>
+
+      <ul class="sidebar__nav">
+        <li>
+          <a href="dashboard.html" class="sidebar__link">
+            <i data-lucide="layout-dashboard" class="icon"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+        <li class="sidebar__section-label">Users</li>
+        <li>
+          <a href="students.html" class="sidebar__link">
+            <i data-lucide="graduation-cap" class="icon"></i>
+            <span>Students</span>
+          </a>
+        </li>
+        <li>
+          <a href="instructors.html" class="sidebar__link">
+            <i data-lucide="user" class="icon"></i>
+            <span>Instructors</span>
+          </a>
+        </li>
+
+        <li class="sidebar__section-label">Content</li>
+        <li>
+          <a href="categories.html" class="sidebar__link">
+            <i data-lucide="folder-tree" class="icon"></i>
+            <span>Categories</span>
+          </a>
+        </li>
+        <li>
+          <a href="courses.html" class="sidebar__link">
+            <i data-lucide="book-open" class="icon"></i>
+            <span>Courses</span>
+          </a>
+        </li>
+        <li>
+          <a href="modules.html" class="sidebar__link">
+            <i data-lucide="layers" class="icon"></i>
+            <span>Modules</span>
+          </a>
+        </li>
+        <li>
+          <a href="materials.html" class="sidebar__link">
+            <i data-lucide="file-text" class="icon"></i>
+            <span>Materials</span>
+          </a>
+        </li>
+
+        <li class="sidebar__section-label">Assessment</li>
+        <li>
+          <a href="assignments.html" class="sidebar__link">
+            <i data-lucide="clipboard-list" class="icon"></i>
+            <span>Assignments</span>
+          </a>
+        </li>
+        <li>
+          <a href="submissions.html" class="sidebar__link">
+            <i data-lucide="inbox" class="icon"></i>
+            <span>Submissions</span>
+          </a>
+        </li>
+        <li>
+          <a href="quizzes.html" class="sidebar__link">
+            <i data-lucide="help-circle" class="icon"></i>
+            <span>Quizzes</span>
+          </a>
+        </li>
+        <li>
+          <a href="questions.html" class="sidebar__link">
+            <i data-lucide="check-square" class="icon"></i>
+            <span>Questions</span>
+          </a>
+        </li>
+
+        <li class="sidebar__section-label">Reports</li>
+        <li>
+          <a href="results.html" class="sidebar__link active">
+            <i data-lucide="trophy" class="icon"></i>
+            <span>Results</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar__footer">
+        <button class="sidebar__logout" onclick="handleLogout()">
+          <i data-lucide="log-out" class="icon"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-main">
+
+      <header class="admin-header">
+        <div style="display:flex; align-items:center; gap: var(--space-md);">
+          <button class="sidebar-toggle" id="sidebarToggle">
+            <i data-lucide="menu"></i>
+          </button>
+          <h1 class="admin-header__title">Results</h1>
+        </div>
+
+        <div class="admin-header__actions">
+          <div class="notification-wrapper">
+            <button class="admin-header__icon-btn" id="notificationBtn">
+              <i data-lucide="bell" style="width:18px;height:18px;"></i>
+              <span class="badge" id="notificationBadge">3</span>
+            </button>
+            <div class="notification-dropdown" id="notificationDropdown">
+              <div class="notification-dropdown__header">Notifications</div>
+              <div id="notificationList"></div>
+            </div>
+          </div>
+
+          <a href="profile.html" class="admin-header__user" style="cursor: pointer;">
+            <div class="admin-header__avatar" id="adminInitials">AU</div>
+            <div>
+              <div class="admin-header__user-name" id="adminName">Admin User</div>
+              <div class="admin-header__user-role" id="adminRole">Administrator</div>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <main class="admin-content">
+
+        <div class="dashboard-welcome">
+  <div>
+    <h2 class="dashboard-welcome__title">Results</h2>
+    <p class="dashboard-welcome__subtitle">Student performance across quizzes and assignments</p>
+  </div>
+  <button class="btn btn-outline no-print" onclick="window.print()">
+    <i data-lucide="printer" style="width:16px;height:16px;"></i>
+    Print Report
+  </button>
+</div>
+
+        <div class="table-toolbar" style="padding:0; margin-bottom: var(--space-lg); background:none; border:none;">
+          <div class="form-group" style="margin-bottom:0; min-width:220px;">
+            <label class="form-label" for="resultsCourseFilter">Course</label>
+            <select class="form-control" id="resultsCourseFilter">
+              <!-- filled in by JS -->
+            </select>
+          </div>
+        </div>
+        
+        <div class="card" style="margin-bottom: var(--space-lg);">
+  <div class="card-header">
+    <div class="card-title">Grade Distribution</div>
+  </div>
+  <div id="gradeDistributionChart"></div>
+</div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-card__icon blue"><i data-lucide="users"></i></div>
+            <div>
+              <div class="stat-card__value" id="statTotalResults">0</div>
+              <div class="stat-card__label">Total Records</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon green"><i data-lucide="trending-up"></i></div>
+            <div>
+              <div class="stat-card__value" id="statAverageScore">0%</div>
+              <div class="stat-card__label">Average Score</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon purple"><i data-lucide="award"></i></div>
+            <div>
+              <div class="stat-card__value" id="statPassRate">0%</div>
+              <div class="stat-card__label">Pass Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Student</th><th>Type</th><th>Title</th><th>Score</th><th>Grade</th></tr>
+              </thead>
+              <tbody id="resultsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/admin-layout.js"></script>
+  <script src="js/results.js"></script>
+</body>
+</html>
